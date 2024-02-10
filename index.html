@@ -20,10 +20,11 @@
       width: 80%;
       background-color: #fff;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      position: relative;
     }
     .left-section {
       flex: 1;
-      padding: 20px;
+      position: relative;
     }
     .right-section {
       flex: 1;
@@ -43,20 +44,25 @@
       display: block;
     }
     .thumbnails {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
       display: flex;
-      justify-content: center;
-      margin-top: 10px;
+      flex-direction: column;
     }
     .thumbnail {
       width: 50px;
       height: 50px;
-      margin: 0 5px;
+      margin-bottom: 5px;
       cursor: pointer;
+      border: 2px solid #fff;
+      border-radius: 50%;
     }
     .thumbnail img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: 50%;
     }
     .product-details {
       margin-top: 20px;
@@ -84,7 +90,6 @@
     <div class="slideshow-container">
       <img class="slide active" src="https://www.graza.co/cdn/shop/products/graza-pdp-duo-header-2_2x_7673c33b-ecf4-43d9-b053-4261454c4f3c_720x.jpg?v=1698551972" alt="Product Image 1">
       <img class="slide" src="https://www.graza.co/cdn/shop/products/graza-home-drizzle-in-use_2x_91b89a03-a404-434d-ae48-fb97e37406ab_720x.jpg?v=1698551972" alt="Product Image 2">
-      <img class="slide" src="https://www.graza.co/cdn/shop/files/graza-pdp-duo-header-3_2x_caa7f912-38b3-4e36-b928-ed6c036abfc7_720x.jpg?v=1698551972" alt="Product Image 3">
     </div>
     <div class="thumbnails">
       <div class="thumbnail" onclick="showSlide(0)">
@@ -93,22 +98,22 @@
       <div class="thumbnail" onclick="showSlide(1)">
         <img src="https://www.graza.co/cdn/shop/products/graza-home-drizzle-in-use_2x_91b89a03-a404-434d-ae48-fb97e37406ab_720x.jpg?v=1698551972" alt="Thumbnail 2">
       </div>
-      <div class="thumbnail" onclick="showSlide(2)">
-        <img src="https://www.graza.co/cdn/shop/files/graza-pdp-duo-header-3_2x_caa7f912-38b3-4e36-b928-ed6c036abfc7_720x.jpg?v=1698551972" alt="Thumbnail 3">
-      </div>
     </div>
   </div>
   <div class="right-section">
     <div class="product-details">
-      <h2>Product Name</h2>
-      <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      <p>Price: $XX.XX</p>
+      <h2>Drizzle & Sizzle Extra Virgin Olive Oil</h2>
+      <p><strong>DRIZZLE:</strong> 500ML</p>
+      <p>Extra Virgin finishing oil made from olives that are picked early, when flavor is bold and antioxidants are highest. Made for eating, never heating.</p>
+      <p><strong>SIZZLE:</strong> 750ML</p>
+      <p>Extra Virgin cooking oil made from mature, mid-season olives that yield a more mellow flavor. Use it every day, in every way.</p>
+      <p><strong>Rating:</strong> &#9733;&#9733;&#9733;&#9733;&#9733; (1573 Reviews)</p>
     </div>
     <div class="quantity">
       <label for="quantity">Quantity:</label>
       <input type="number" id="quantity" name="quantity" value="1" min="1">
     </div>
-    <button class="purchase-button">Purchase</button>
+    <button class="purchase-button">Subscribe $33.30</button>
   </div>
 </div>
 
@@ -126,6 +131,7 @@
         slide.classList.remove('active');
       }
     });
+
     thumbnails.forEach((thumbnail, i) => {
       if (i === currentIndex) {
         thumbnail.classList.add('active');
@@ -137,10 +143,12 @@
 
   showSlide(currentIndex);
 
-  setInterval(() => {
-    currentIndex = (currentIndex + 1) % slides.length;
-    showSlide(currentIndex);
-  }, 3000);
+  thumbnails.forEach((thumbnail, i) => {
+    thumbnail.addEventListener('click', () => {
+      showSlide(i);
+    });
+  });
+
 </script>
 
 </body>
